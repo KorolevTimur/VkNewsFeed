@@ -15,6 +15,8 @@
 		8469567E241003440089A53D /* VKSdkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8469567D241003440089A53D /* VKSdkFramework.framework */; };
 		8469567F241003440089A53D /* VKSdkFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8469567D241003440089A53D /* VKSdkFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		846956822410088E0089A53D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846956812410088E0089A53D /* AuthService.swift */; };
+		84738F6324114A6700858699 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84738F6224114A6700858699 /* NetworkService.swift */; };
+		84738F6524114BB500858699 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84738F6424114BB500858699 /* API.swift */; };
 		847B9BC724100DA3007D33F6 /* AuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847B9BC624100DA3007D33F6 /* AuthViewController.storyboard */; };
 		8481F0D524101EB900375BCB /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481F0D424101EB900375BCB /* FeedViewController.swift */; };
 		8481F0D724101ED700375BCB /* FeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8481F0D624101ED700375BCB /* FeedViewController.storyboard */; };
@@ -44,6 +46,8 @@
 		84695675240FFB540089A53D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8469567D241003440089A53D /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VKSdkFramework.framework; path = Carthage/Build/iOS/VKSdkFramework.framework; sourceTree = "<group>"; };
 		846956812410088E0089A53D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		84738F6224114A6700858699 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		84738F6424114BB500858699 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		847B9BC624100DA3007D33F6 /* AuthViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthViewController.storyboard; sourceTree = "<group>"; };
 		8481F0D424101EB900375BCB /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		8481F0D624101ED700375BCB /* FeedViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedViewController.storyboard; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				846956812410088E0089A53D /* AuthService.swift */,
+				84738F6224114A6700858699 /* NetworkService.swift */,
+				84738F6424114BB500858699 /* API.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -226,7 +232,9 @@
 				84695668240FFB530089A53D /* AppDelegate.swift in Sources */,
 				8481F0D524101EB900375BCB /* FeedViewController.swift in Sources */,
 				8469566A240FFB530089A53D /* SceneDelegate.swift in Sources */,
+				84738F6324114A6700858699 /* NetworkService.swift in Sources */,
 				846956822410088E0089A53D /* AuthService.swift in Sources */,
+				84738F6524114BB500858699 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
