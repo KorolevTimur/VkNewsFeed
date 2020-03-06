@@ -14,7 +14,16 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkService.getFeed()
+        let params = ["filters": "post, photo"]
+        networkService.request(path: API.newsFeed, params: params) { (data, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+            guard let data = data else { return }
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
+            
+        }
         view.backgroundColor = .systemBlue
     }
 }
