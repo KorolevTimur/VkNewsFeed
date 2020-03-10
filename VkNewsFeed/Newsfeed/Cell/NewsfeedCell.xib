@@ -138,7 +138,7 @@
                 <outlet property="iconImageView" destination="eJH-KB-hx8" id="AlS-Vl-wps"/>
                 <outlet property="likesLabel" destination="Fen-Nd-nkA" id="D1r-wJ-tlE"/>
                 <outlet property="nameLabel" destination="SJq-2d-XL3" id="FgF-3p-d7v"/>
-                <outlet property="pastLabel" destination="82x-aj-Bhw" id="5P8-HB-M8v"/>
+                <outlet property="postLabel" destination="82x-aj-Bhw" id="5P8-HB-M8v"/>
                 <outlet property="sharesLabel" destination="DKt-6s-pzy" id="QzI-Oj-qly"/>
                 <outlet property="viewsLabel" destination="XdP-Kg-mrG" id="BhN-dT-Feh"/>
             </connections>
