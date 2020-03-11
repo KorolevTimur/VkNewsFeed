@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842B8A59241941EF005B6752 /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B8A58241941EF005B6752 /* WebImageView.swift */; };
 		845201AC2417E1F200BFC4F4 /* NewsfeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845201AB2417E1F200BFC4F4 /* NewsfeedCell.swift */; };
 		845201AE2417E27700BFC4F4 /* NewsfeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845201AD2417E27700BFC4F4 /* NewsfeedCell.xib */; };
 		84695668240FFB530089A53D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84695667240FFB530089A53D /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		842B8A58241941EF005B6752 /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
 		845201AB2417E1F200BFC4F4 /* NewsfeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsfeedCell.swift; sourceTree = "<group>"; };
 		845201AD2417E27700BFC4F4 /* NewsfeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsfeedCell.xib; sourceTree = "<group>"; };
 		84695664240FFB530089A53D /* VkNewsFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VkNewsFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		842B8A57241941BA005B6752 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				842B8A58241941EF005B6752 /* WebImageView.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		845201AA2417E1D500BFC4F4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +127,7 @@
 				846956832410089F0089A53D /* Services */,
 				8481F0D92410200900375BCB /* AuthViewController */,
 				84ADBA852416908F007211D6 /* Newsfeed */,
+				842B8A57241941BA005B6752 /* Helpers */,
 				84695670240FFB540089A53D /* Assets.xcassets */,
 				84695672240FFB540089A53D /* LaunchScreen.storyboard */,
 				84695675240FFB540089A53D /* Info.plist */,
@@ -281,6 +292,7 @@
 				8469566A240FFB530089A53D /* SceneDelegate.swift in Sources */,
 				84738F6324114A6700858699 /* NetworkService.swift in Sources */,
 				84ADBA9024169104007211D6 /* NewsfeedModels.swift in Sources */,
+				842B8A59241941EF005B6752 /* WebImageView.swift in Sources */,
 				84758B7F2413C2E800E0B405 /* NetworkDataFetcher.swift in Sources */,
 				84ADBA8E24169104007211D6 /* NewsfeedWorker.swift in Sources */,
 				846956822410088E0089A53D /* AuthService.swift in Sources */,
