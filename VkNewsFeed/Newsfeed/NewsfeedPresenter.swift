@@ -14,6 +14,13 @@ protocol NewsfeedPresentationLogic {
 
 class NewsfeedPresenter: NewsfeedPresentationLogic {
   weak var viewController: NewsfeedDisplayLogic?
+    let dateFormatter: DateFormatter = {
+       let dt = DateFormatter()
+        dt.locale = Locale(identifier: "ru_RU")
+        dt.dateFormat = "d MMM 'в' HH:mm"
+        return dt
+    }()
+    
   
   func presentData(response: Newsfeed.Model.Response.ResponseType) {
   
@@ -21,7 +28,7 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
     case .presentNewsfeed(let feed):
         
         let cells = feed.items.map { (feedItem) in
-            cellViewModel(from: feedItem)
+            cellViewModel(from: feedItem, profiles: feed.profiles, groups: feed.groups)
         }
         
         let feedViewModel = FeedViewModel.init(cells: cells)
@@ -30,10 +37,17 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
     }
   }
     
-    private func cellViewModel(from feedItem: FeedItem) -> FeedViewModel.Cell {
-        FeedViewModel.Cell.init(iconUrlString: "",
-                                name: "future name",
-                                date: "future date",
+    private func cellViewModel(from feedItem: FeedItem, profiles: [Profile], groups: [Group]) -> FeedViewModel.Cell {
+        
+        let profile = self.profile(for: feedItem.sourceId, profiles: profiles, groups: groups)
+        
+        let date = Date(timeIntervalSince1970: feedItem.date)
+        let dataTitle = dateFormatter.string(from: date)
+        
+        
+        return FeedViewModel.Cell.init(iconUrlString: profile.photo,
+                                name: profile.name,
+                                date: dataTitle,
                                 text: feedItem.text,
                                 likes: String(feedItem.likes?.count ?? 0),
                                 comments: String(feedItem.comments?.count ?? 0),
@@ -41,4 +55,13 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
                                 views: String(feedItem.views?.count ?? 0))
     }
   
+    private func profile(for sourseId: Int, profiles: [Profile], groups: [Group]) -> ProfileRepresentable {
+        
+        let profilesOrGroups: [ProfileRepresentable] = sourseId >= 0 ? profiles : groups
+        let normalSourseId = sourseId >= 0 ? sourseId : -sourseId
+        let profileRepresentable = profilesOrGroups.first { (myProfileRepresentable) -> Bool in
+            myProfileRepresentable.id == normalSourseId
+        }
+        return profileRepresentable!
+    }
 }
