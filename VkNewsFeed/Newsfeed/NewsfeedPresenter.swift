@@ -29,10 +29,10 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
   func presentData(response: Newsfeed.Model.Response.ResponseType) {
   
     switch response {
-    case .presentNewsfeed(let feed):
+    case .presentNewsfeed(let feed, let revealedPostIds):
         
         let cells = feed.items.map { (feedItem) in
-            cellViewModel(from: feedItem, profiles: feed.profiles, groups: feed.groups)
+            cellViewModel(from: feedItem, profiles: feed.profiles, groups: feed.groups, revealedPostIds: revealedPostIds)
         }
         
         let feedViewModel = FeedViewModel.init(cells: cells)
@@ -41,7 +41,7 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
     }
   }
     
-    private func cellViewModel(from feedItem: FeedItem, profiles: [Profile], groups: [Group]) -> FeedViewModel.Cell {
+    private func cellViewModel(from feedItem: FeedItem, profiles: [Profile], groups: [Group], revealedPostIds: [Int]) -> FeedViewModel.Cell {
         
         let profile = self.profile(for: feedItem.sourceId, profiles: profiles, groups: groups)
         
@@ -50,18 +50,24 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
         let date = Date(timeIntervalSince1970: feedItem.date)
         let dataTitle = dateFormatter.string(from: date)
         
-        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text, phootoAttachment: photoAttachment)
+//        let isFullSized = revealedPostIds.contains { (postId) -> Bool in
+//            return postId == feedItem.postId
+//        }
+        let isFullSized = revealedPostIds.contains(feedItem.postId)
         
-        return FeedViewModel.Cell.init(iconUrlString: profile.photo,
-                                name: profile.name,
-                                date: dataTitle,
-                                text: feedItem.text,
-                                likes: String(feedItem.likes?.count ?? 0),
-                                comments: String(feedItem.comments?.count ?? 0),
-                                shares: String(feedItem.reposts?.count ?? 0),
-                                views: String(feedItem.views?.count ?? 0),
-                                photoAttachment: photoAttachment,
-                                sizes: sizes)
+        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text, phootoAttachment: photoAttachment, isFullSizedPost: isFullSized)
+        
+        return FeedViewModel.Cell.init(postId: feedItem.postId,
+                                       iconUrlString: profile.photo,
+                                       name: profile.name,
+                                       date: dataTitle,
+                                       text: feedItem.text,
+                                       likes: String(feedItem.likes?.count ?? 0),
+                                       comments: String(feedItem.comments?.count ?? 0),
+                                       shares: String(feedItem.reposts?.count ?? 0),
+                                       views: String(feedItem.views?.count ?? 0),
+                                       photoAttachment: photoAttachment,
+                                       sizes: sizes)
     }
   
     private func profile(for sourseId: Int, profiles: [Profile], groups: [Group]) -> ProfileRepresentable {
