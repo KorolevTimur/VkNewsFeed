@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol FeedCellLayoutCalculatorProtocol {
-    func sizes(postText: String?, phootoAttachment: FeedCellPhotoAttachmentViewModel?, isFullSizedPost: Bool) -> FeedCellSizes
+    func sizes(postText: String?, phootoAttachments: [FeedCellPhotoAttachmentViewModel], isFullSizedPost: Bool) -> FeedCellSizes
 }
 
 struct Sizes: FeedCellSizes {
@@ -29,7 +29,7 @@ final class NewsfeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
         self.screenWidth = screenWidth
     }
     
-    func sizes(postText: String?, phootoAttachment: FeedCellPhotoAttachmentViewModel?, isFullSizedPost: Bool) -> FeedCellSizes {
+    func sizes(postText: String?, phootoAttachments: [FeedCellPhotoAttachmentViewModel], isFullSizedPost: Bool) -> FeedCellSizes {
         
         var showMoreTextButton = false
         
@@ -74,9 +74,18 @@ final class NewsfeedCellLayoutCalculator: FeedCellLayoutCalculatorProtocol {
         var attachmentFrame = CGRect(origin: CGPoint(x: 0, y: attachmentTop),
                                      size: CGSize.zero)
         
-        if let attachment = phootoAttachment {
+//        if let attachment = phootoAttachment {
+//            let ratio = CGFloat(attachment.height) / CGFloat(attachment.width)
+//            attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ratio)
+//        }
+        
+        if let attachment = phootoAttachments.first {
             let ratio = CGFloat(attachment.height) / CGFloat(attachment.width)
-            attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ratio)
+            if phootoAttachments.count == 1 {
+                attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ratio)
+            } else if phootoAttachments.count > 1 {
+                attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ratio)
+            }
         }
         
         //MARK: - Work with bottomViewFrame
