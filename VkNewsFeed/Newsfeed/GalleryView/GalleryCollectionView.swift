@@ -14,8 +14,6 @@ class GalleryCollectionView: UICollectionView, UICollectionViewDelegate, UIColle
     var photos = [FeedCellPhotoAttachmentViewModel]()
 
     init() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
         let rowLayout = RowLayout()
         super.init(frame: .zero, collectionViewLayout: rowLayout)
         
@@ -29,6 +27,7 @@ class GalleryCollectionView: UICollectionView, UICollectionViewDelegate, UIColle
     
     func set(photos: [FeedCellPhotoAttachmentViewModel]) {
         self.photos = photos
+        contentOffset = CGPoint.zero
         reloadData()
     }
     
@@ -44,5 +43,14 @@ class GalleryCollectionView: UICollectionView, UICollectionViewDelegate, UIColle
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension GalleryCollectionView: RowLayoutDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, photoAtIndexPath indexPath: IndexPath) -> CGSize {
+        let width = photos[indexPath.row].width
+        let height = photos[indexPath.row].height
+        return CGSize(width: width, height: height)
     }
 }
