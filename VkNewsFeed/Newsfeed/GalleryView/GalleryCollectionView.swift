@@ -20,9 +20,16 @@ class GalleryCollectionView: UICollectionView, UICollectionViewDelegate, UIColle
         delegate = self
         dataSource = self
         
-        backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+        backgroundColor = UIColor.white
+        
+        showsHorizontalScrollIndicator = false
+        showsVerticalScrollIndicator = false
         
         register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.reuseId)
+        
+        if let rowLayout = collectionViewLayout as? RowLayout {
+            rowLayout.delegate = self
+        }
     }
     
     func set(photos: [FeedCellPhotoAttachmentViewModel]) {
