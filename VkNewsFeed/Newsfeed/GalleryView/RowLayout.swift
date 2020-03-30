@@ -39,7 +39,7 @@ class RowLayout: UICollectionViewLayout {
     override func prepare() {
         contentWidth = 0
         cache = []
-        guard cache.isEmpty == true, let collectionView = collectionView else { return }
+        guard cache.isEmpty, let collectionView = collectionView else { return }
         
         var photos = [CGSize]()
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
