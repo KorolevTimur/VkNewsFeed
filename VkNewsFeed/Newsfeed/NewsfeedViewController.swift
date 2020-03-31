@@ -21,6 +21,11 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
   
     @IBOutlet weak var table: UITableView!
     private var titleView = TitleView()
+    private var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
+    }()
     
     // MARK: Setup
   
@@ -46,22 +51,37 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
     super.viewDidLoad()
     setup()
     setupTopBars()
+    setupTable()
     
-    table.register(UINib(nibName: "NewsfeedCell", bundle: nil), forCellReuseIdentifier: NewsfeedCell.reuseId)
-    table.register(NewsfeedCodeCell.self, forCellReuseIdentifier: NewsfeedCodeCell.reuseId)
-    
-    table.separatorStyle = .none
-    table.backgroundColor = .clear
     view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
     
     interactor?.makeRequest(request: Newsfeed.Model.Request.RequestType.getNewsfeed)
     interactor?.makeRequest(request: Newsfeed.Model.Request.RequestType.getUser)
   }
     
+    private func setupTable() {
+        let topInset: CGFloat = 8
+        table.contentInset.top = topInset
+        
+        table.register(UINib(nibName: "NewsfeedCell", bundle: nil), forCellReuseIdentifier: NewsfeedCell.reuseId)
+        table.register(NewsfeedCodeCell.self, forCellReuseIdentifier: NewsfeedCodeCell.reuseId)
+        
+        table.separatorStyle = .none
+        table.backgroundColor = .clear
+        
+        table.addSubview(refreshControl)
+        
+    }
+    
     private func setupTopBars() {
         self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.titleView = titleView
+    }
+    
+    @objc private func refresh() {
+
+        interactor?.makeRequest(request: Newsfeed.Model.Request.RequestType.getNewsfeed)
     }
   
   func displayData(viewModel: Newsfeed.Model.ViewModel.ViewModelData) {
@@ -71,6 +91,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic, NewsfeedCo
     case .displayNewsfeed(let feedViewModel):
         self.feedViewModel = feedViewModel
         table.reloadData()
+        refreshControl.endRefreshing()
     case .displayUser(let userViewModel):
         titleView.set(userViewModel: userViewModel)
     }
