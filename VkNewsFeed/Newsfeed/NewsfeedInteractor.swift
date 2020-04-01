@@ -16,36 +16,29 @@ class NewsfeedInteractor: NewsfeedBusinessLogic {
 
   var presenter: NewsfeedPresentationLogic?
   var service: NewsfeedService?
-    
-    private var revealPostIds = [Int]()
-    private var feedResponse: FeedResponse?
-    
-    private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
   
   func makeRequest(request: Newsfeed.Model.Request.RequestType) {
     if service == nil {
       service = NewsfeedService()
     }
     
-    switch  request {
-        
+    switch request {
     case .getNewsfeed:
-        fetcher.getFeed { [weak self] (feedResponse) in
-            self?.feedResponse = feedResponse
-            self?.presentFeed()
-        }
-    case .revealPostIds(let postId):
-        revealPostIds.append(postId)
-        presentFeed()
+        service?.getFeed(completion: { [weak self] (revealPostIds, feed) in
+            self?.presenter?.presentData(response: Newsfeed.Model.Response.ResponseType.presentNewsfeed(feed: feed, revealedPostIds: revealPostIds))
+        })
     case .getUser:
-        fetcher.getUser { (userResponse) in
-            self.presenter?.presentData(response: Newsfeed.Model.Response.ResponseType.presentUserInfo(user: userResponse))
-        }
+        service?.getUser(completion: { [weak self] (user) in
+            self?.presenter?.presentData(response: Newsfeed.Model.Response.ResponseType.presentUserInfo(user: user))
+        })
+    case .revealPostIds(let postId):
+        service?.revealPostIds(forPostId: postId, completion: { [weak self] (revealPostIds, feed) in
+            self?.presenter?.presentData(response: Newsfeed.Model.Response.ResponseType.presentNewsfeed(feed: feed, revealedPostIds: revealPostIds))
+        })
+    case .getNextBatch:
+        service?.getNextBatch(completion: { [weak self] (revealPostIds, feed) in
+            self?.presenter?.presentData(response: Newsfeed.Model.Response.ResponseType.presentNewsfeed(feed: feed, revealedPostIds: revealPostIds))
+        })
     }
   }
-    private func presentFeed() {
-        guard let feedResponse = feedResponse else { return }
-        presenter?.presentData(response: Newsfeed.Model.Response.ResponseType.presentNewsfeed(feed: feedResponse, revealedPostIds: revealPostIds))
-    }
-  
 }
