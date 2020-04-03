@@ -15,6 +15,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1w-mX-irs" customClass="GradientView" customModule="VkNewsFeed" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="1" green="0.55294117647058827" blue="0.55294117647058827" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="1" green="0.81568627450980391" blue="0.55294117647058827" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WM9-is-Q6q">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -24,9 +36,13 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="z1w-mX-irs" firstAttribute="leading" secondItem="fOU-HX-xPg" secondAttribute="leading" id="FAj-iZ-7aB"/>
+                            <constraint firstItem="z1w-mX-irs" firstAttribute="top" secondItem="fOU-HX-xPg" secondAttribute="top" id="G33-rT-F4J"/>
                             <constraint firstItem="WM9-is-Q6q" firstAttribute="leading" secondItem="fOU-HX-xPg" secondAttribute="leading" id="H1i-2a-ymK"/>
+                            <constraint firstItem="z1w-mX-irs" firstAttribute="trailing" secondItem="fOU-HX-xPg" secondAttribute="trailing" id="Zdg-tC-jUz"/>
+                            <constraint firstItem="z1w-mX-irs" firstAttribute="bottom" secondItem="fOU-HX-xPg" secondAttribute="bottom" id="ch9-HJ-8zK"/>
                             <constraint firstItem="fOU-HX-xPg" firstAttribute="trailing" secondItem="WM9-is-Q6q" secondAttribute="trailing" id="pZx-iE-9bv"/>
                             <constraint firstItem="fOU-HX-xPg" firstAttribute="bottom" secondItem="WM9-is-Q6q" secondAttribute="bottom" id="wTO-1c-AZ6"/>
                             <constraint firstItem="WM9-is-Q6q" firstAttribute="top" secondItem="fOU-HX-xPg" secondAttribute="top" id="x8H-TS-cEF"/>
@@ -39,7 +55,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xfv-34-wRO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-366" y="37"/>
+            <point key="canvasLocation" x="-367.19999999999999" y="36.431784107946029"/>
         </scene>
     </scenes>
 </document>
